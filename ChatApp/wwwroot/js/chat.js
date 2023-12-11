@@ -11,7 +11,7 @@ connection.on("ReceivedMessage", function (name, time, message) {
     // We can assign user-supplied strings to an element's textContent because it
     // is not interpreted as markup. If you're assigning in any other way, you 
     // should be aware of possible script injection concerns.
-    li.textContent = `${name} says ${message}`;
+    li.innerHTML = `${name.bold()} (${new Date(time).toLocaleTimeString().bold()}) : ${message}`;
 });
 
 connection.start().then(function () {
