@@ -16,8 +16,15 @@ connection.on("ReceivedMessage", function (name, time, message) {
 
 connection.start().then(function () {
     document.getElementById("sendButton").disabled = false;
+    document.getElementById("chatConnectionInfo").style.display = 'none';
 }).catch(function (err) {
     return console.error(err.toString());
+});
+
+connection.onclose(function(e) {
+    document.getElementById("chatConnectionInfo").style.display = 'block';
+    console.log('Reconnecting in 5 seconds...');
+    setTimeout(connection.start(), 5000);
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
